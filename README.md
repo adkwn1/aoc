@@ -10,14 +10,15 @@ USER_AGENT=<user agent string from your browser>
 ```
 To get your session ID and user agent string, inspect the HTTP GET request header from your browser. For example, if using Firefox, press `ctrl` + `shift` + `i` and copy the values from:
 
+<img width="860" height="589" alt="session_screen" src="https://github.com/user-attachments/assets/d9ac2c07-0b9d-40d8-8036-6b5c3bc082e8" />
 
 3. Run the `aoc.py` script.
 ```shell
-user@domain:~$/../aoc/python3 aoc.py <DAY> <YEAR>
+user@domain:~/../aoc$ python3 aoc.py <DAY> <YEAR>
 ```
 If desired, edit the "shebang" to the location of your Python interpreter (e.g. if on Windows or using a venv) to run `aoc.py` as a script:
 ```shell
-./aoc.py <DAY> <YEAR>
+$./aoc.py <DAY> <YEAR>
 ```
 The script creates the following directory structure and files:
 ```
@@ -33,7 +34,7 @@ user@domain:~$/../aoc/python3 aoc.py 1 2025
 ```
 The following structure is crated:
 ```
-root/
+aoc/
 |---2025/
     |---d_1/
         |---day_1.py
