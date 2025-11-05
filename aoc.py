@@ -1,25 +1,50 @@
+#!/home/charlie/dev/aoc/.venv/bin/python    
+# edit the line above to the appropriate path if required
+
 import os
 import argparse
 import requests
+import stat
+from requests.exceptions import ConnectionError
+from pathlib import Path
 from dotenv import load_dotenv
 
 
-def build_workspace(day:int, year:int, part:int):
+def build_workspace(day:int, year:int):
     load_dotenv()
     uri = 'http://adventofcode.com/{year}/day/{day}/input'.format(year=year, day=day)
-    
+    dirpath = Path(f"./{year}/d_{day}/")
+    dirpath.mkdir(parents=True, exist_ok=True)
+
     try:
         response = requests.get(uri, cookies={'session': os.getenv("SESSION_ID")}, headers={'User-Agent': os.getenv("USER_AGENT")})
 
-    except Exception as e:
-        print(f"Workspace not created. Error getting problem input: {repr(e)}")
+    except ConnectionError as e:
+        print(f"Workspace not created. Connection error -- check uri, SESSION_ID and/or USER_AGENT variable(s): {repr(e)}")
     
+    with open(f"./{str(dirpath)}/input.txt", "w") as input_file, open(f"./{str(dirpath)}/day_{day}.py", "w") as solution_file:
+        input_file.write(response.text)
+        solution_file.write(f'''#!/usr/bin/python3
+# edit the line above to the appropriate path if required
+                            
+def solve(input:str):
+    with open(input, "r") as file:
+        for line in file:
+            print(line.strip())
+
+                            
+if __name__ == "__main__":
+    solve("./input.txt")''')
+    
+    f = Path(f"./{str(dirpath)}/day_{day}.py")
+    f.chmod(f.stat().st_mode | stat.S_IEXEC)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Builds a workspace for the specified day's AoC problem with boilerplate files.")
     parser.add_argument("day", type=int, help="The specific AoC day (i.e. 1-25).")
     parser.add_argument("year", type=int, help="The specific AoC year (e.g. 2025).")
-    parser.add_argument("-p", "--part", required=False, type=int, help="Optional -- desired problem input (i.e. part 1 or 2).")
+
     args = parser.parse_args()
    
-    build_workspace(args.day, args.year, args.part)
+    build_workspace(args.day, args.year)
