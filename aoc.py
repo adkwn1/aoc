@@ -15,15 +15,16 @@ def build_workspace(day:int, year:int):
     uri = 'http://adventofcode.com/{year}/day/{day}/input'.format(year=year, day=day)
     dirpath = Path(f"./{year}/d_{day}/")
     dirpath.mkdir(parents=True, exist_ok=True)
-
+            
     try:
         response = requests.get(uri, cookies={'session': os.getenv("SESSION_ID")}, headers={'User-Agent': os.getenv("USER_AGENT")})
-
+                
     except ConnectionError as e:
-        print(f"Workspace not created. Connection error -- check uri, SESSION_ID and/or USER_AGENT variable(s): {repr(e)}")
+        print(f"Connection error -- check uri, SESSION_ID and/or USER_AGENT variable(s): {repr(e)}")
     
+    text = response.text if response.status_code == 200 else ""
     with open(f"./{str(dirpath)}/input.txt", "w") as input_file, open(f"./{str(dirpath)}/day_{day}.py", "w") as solution_file:
-        input_file.write(response.text)
+        input_file.write(text)
         solution_file.write(f'''#!/usr/bin/python3
 # edit the line above to the appropriate path if required
                             

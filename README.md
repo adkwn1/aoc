@@ -16,9 +16,10 @@ To get your session ID and user agent string, inspect the HTTP GET request heade
 ```shell
 user@domain:~/../aoc$ python3 aoc.py <DAY> <YEAR>
 ```
-If desired, edit the "shebang" to the location of your Python interpreter (e.g. if on Windows or using a venv) to run `aoc.py` as a script:
+If desired, edit the "shebang" to the location of your Python interpreter (e.g. if on Windows or using a venv) to run `aoc.py` as a script. May also have to modify permissions:
 ```shell
-$./aoc.py <DAY> <YEAR>
+/../aoc$ chmod +x aoc.py
+/../aoc$ ./aoc.py <DAY> <YEAR>
 ```
 The script creates the following directory structure and files:
 ```
@@ -32,7 +33,7 @@ For example, if running the command:
 ```shell
 user@domain:~$/../aoc/python3 aoc.py 1 2025
 ```
-The following structure is crated:
+The following structure is created:
 ```
 aoc/
 |---2025/
@@ -41,7 +42,9 @@ aoc/
         |---input.txt
 ```
 
-4. The `input.txt` will populate with that day's input specific to your login session. The `day_#.py` contains boilerplate code to read the input.
+4. The `input.txt` will populate with that day's input specific to your login session. The `day_#.py` contains boilerplate code to read the input. 
+
+5. If `.env` variables set incorrectly, or session expires, the workspace is still created, but `input.txt` will be empty.
 
 ## Dependencies
 If using UV, you can install the dependent packages via `uv sync`. Alternatively, a `requirements.txt` is included to run the script -- no additional packages/libraries included from the base interpreter (i.e. Python 3.12).
