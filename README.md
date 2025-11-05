@@ -31,7 +31,7 @@ aoc/
 ```
 For example, if running the command:
 ```shell
-user@domain:~$/../aoc/python3 aoc.py 1 2025
+user@domain:~/../aoc$ python3 aoc.py 1 2025
 ```
 The following structure is created:
 ```
