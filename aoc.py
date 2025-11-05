@@ -1,4 +1,4 @@
-#!/home/charlie/dev/aoc/.venv/bin/python    
+#!/usr/bin/python3
 # edit the line above to the appropriate path if required
 
 import os
