@@ -35,7 +35,7 @@ def solve(input:str):
 
                             
 if __name__ == "__main__":
-    solve("./input.txt")''')
+    solve("./input.txt")\n''')
     
     f = Path(f"./{str(dirpath)}/day_{day}.py")
     f.chmod(f.stat().st_mode | stat.S_IEXEC)
@@ -49,3 +49,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
    
     build_workspace(args.day, args.year)
+    
