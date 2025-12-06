@@ -1,5 +1,5 @@
 # Advent of Code Utility
-This is a Python utility to create a workspace for [Advent of Code](https://adventofcode.com/2025/about) problems.
+This is a Python utility to create a workspace for [Advent of Code](https://adventofcode.com/2025/about) problems and my solutions from previous years. If you want to use the utility without downloading the solutions, clone the [workspace-builder](https://github.com/adkwn1/aoc/tree/workspace-builder) branch. All credits for Advent of Code go to [Eric Wastl](https://was.tl/).
 
 ## Usage
 1. Clone this repository.
@@ -42,9 +42,9 @@ aoc/
         |---input.txt
 ```
 
-4. The `input.txt` will populate with that day's input specific to your login session. The `day_#.py` contains boilerplate code to read the input. 
+4. The `input.txt` will populate with that day's input specific to your login session. The `day_#.py` file contains boilerplate code to read the input. 
 
-5. If `.env` variables set incorrectly, or session expires, the workspace is still created, but `input.txt` will be empty.
+5. If the `.env` variables are set incorrectly or session cookie expires the workspace is still created, but `input.txt` will be empty.
 
 ## Dependencies
 If using UV, you can install the dependent packages via `uv sync`. Alternatively, a `requirements.txt` is included to run the script -- no additional packages/libraries included from the base interpreter (i.e. Python 3.12).
