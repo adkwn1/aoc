@@ -1,5 +1,5 @@
 # Advent of Code Utility
-This is a Python utility to create a workspace for an [Advent of Code](https://adventofcode.com/2025/about) problem.
+This is a Python utility to create a workspace for [Advent of Code](https://adventofcode.com/2025/about) problems.
 
 ## Usage
 1. Clone this repository.
