@@ -1,5 +1,5 @@
 # Advent of Code Utility
-This is a Python utility to create a workspace for [Advent of Code](https://adventofcode.com/2025/about) problems and my solutions from previous years. If you want to use the utility without downloading the solutions, clone the [workspace-builder](https://github.com/adkwn1/aoc/tree/workspace-builder) branch. All credits for Advent of Code go to [Eric Wastl](https://was.tl/).
+This is a Python utility to create a workspace for [Advent of Code](https://adventofcode.com/) problems and my solutions from previous years. If you want to use the utility without downloading the solutions, clone the [workspace-builder](https://github.com/adkwn1/aoc/tree/workspace-builder) branch. All credits for Advent of Code go to [Eric Wastl](https://was.tl/).
 
 ## Usage
 1. Clone this repository.
