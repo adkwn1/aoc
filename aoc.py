@@ -27,15 +27,17 @@ def build_workspace(day:int, year:int):
         input_file.write(text)
         solution_file.write(f'''#!/usr/bin/python3
 # edit the line above to the appropriate path if required
-                            
-def solve(input:str):
-    with open(input, "r") as file:
-        for line in file:
-            print(line.strip())
+                                                     
+def solve():
+    pass
 
                             
 if __name__ == "__main__":
-    solve("./input.txt")\n''')
+    with open("input.txt", "r") as file:
+        for line in file:
+            print(line.strip())
+    
+    solve()\n''')
     
     f = Path(f"./{str(dirpath)}/day_{day}.py")
     f.chmod(f.stat().st_mode | stat.S_IEXEC)
