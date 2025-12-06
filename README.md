@@ -14,12 +14,12 @@ To get your session ID and user agent string, inspect the HTTP GET request heade
 
 3. Run the `aoc.py` script.
 ```shell
-user@domain:~/../aoc$ python3 aoc.py <DAY> <YEAR>
+$ python3 aoc.py <DAY> <YEAR>
 ```
 If desired, edit the "shebang" to the location of your Python interpreter (e.g. if on Windows or using a venv) to run `aoc.py` as a script. May also have to modify permissions:
 ```shell
-/../aoc$ chmod +x aoc.py
-/../aoc$ ./aoc.py <DAY> <YEAR>
+$ chmod +x aoc.py
+$ ./aoc.py <DAY> <YEAR>
 ```
 The script creates the following directory structure and files:
 ```
@@ -31,7 +31,7 @@ aoc/
 ```
 For example, if running the command:
 ```shell
-user@domain:~/../aoc$ python3 aoc.py 1 2025
+$ python3 aoc.py 1 2025
 ```
 The following structure is created:
 ```
