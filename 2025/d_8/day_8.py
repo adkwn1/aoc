@@ -2,85 +2,65 @@
 # edit the line above to the appropriate path if required
 
 from math import sqrt
-from itertools import combinations
+from collections import defaultdict
 
 
-def get_distance(a:str, b:str):
-    x1, y1, z1 = a.split(",")
-    x2, y2, z2 = b.split(",")
-
-    return sqrt(((int(x2) - int(x1))**2 + (int(y2) - int(y1))**2 + (int(z2) - int(z1))**2))
+UNION_FIND = {}
 
 
-def make_circuits(edges:list[tuple[str, str]], stop:int, pt:int):
-    circuits = {}
-    seen = set()
-    count = 0
-    prev = None
-    for edge in edges:
-        if pt == 1 and count == stop:
-            break
-        elif pt == 2 and len(seen) == stop:
-            break
+def get_distance(a:tuple[int, int, int], b:tuple[int, int, int]) -> float:
+    x1, y1, z1 = a
+    x2, y2, z2 = b
 
-        u, v = (edge[0], edge[1])
-        if not (u in circuits.get(v, []) and v in circuits.get(u, [])):
-            circuits[u] = circuits.get(u, []) + [v]
-            circuits[v] = circuits.get(v, []) + [u]
-            count += 1
-            seen.add(u)
-            seen.add(v)
-            prev = (u, v)
-
-    return circuits, prev
+    return sqrt((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)
 
 
-def get_circuit_size(box:str, circuits:dict, seen:set):
-    seen.add(box)
-    if box not in circuits:
-        return 1
-    
-    else:
-        edges = circuits.get(box)
-        count = 1
-        for e in edges:
-            if e not in seen:
-                count += get_circuit_size(e, circuits, seen)
-                seen.add(e)
+def find(x:int):
+    if x == UNION_FIND[x]:
+        return x
+    UNION_FIND[x] = find(UNION_FIND[x])
         
-        return count
+    return UNION_FIND[x]
 
 
-def solve(sorted_conns:list, stop:int, pt:int):
-    circuit, prev = make_circuits(sorted_conns, stop, pt)
+def unite(a, b):
+    UNION_FIND[find(a)] = find(b)
 
-    if pt == 1:
-        seen = set()
-        count = []
-        for node in coords:
-            if node not in seen:
-                count.append(get_circuit_size(node, circuit, seen))  
-        count = sorted(count, reverse=True)
+
+def solve(parents:list[tuple[int, int, int]], rels:list[tuple[float, int, int]], stop:int=1000):
+    num_connections = 0
+
+    for itx, (_d, i, j) in enumerate(rels):
+        if itx == stop:
+            circuit_size = defaultdict(int)
+            for x in range(len(parents)):
+                circuit_size[find(x)] += 1
+
+            solution = sorted(list(circuit_size.values()))
+            print(solution[-1]*solution[-2]*solution[-3])
+    
+        if find(i) != find(j):
+            num_connections += 1
+            if num_connections == (len(parents) - 1):
+                print(parents[i][0] * parents[j][0])
         
-        return count[0] * count[1] * count[2]
-    
-    else:
-        x1 = int(prev[0].split(",")[0])
-        x2 = int(prev[1].split(",")[0])
+        unite(i, j)
 
-        return x1 * x2
 
-    
 if __name__ == "__main__":
-    coords = []
+    parents = []
     with open("input.txt", "r") as file:
-        for line in file:
-            coords.append(line.strip())
+        for line in file.read().splitlines():
+            x, y, z = [int(coord) for coord in line.split(",")]
+            parents.append((x, y, z))
     
-    conns = {}
-    for a, b in combinations(coords, 2):
-        conns[(a, b)] = get_distance(a, b)
-    
-    sorted_conns = dict(sorted(conns.items(), key=lambda dist: dist[1]))
-    print(solve(list(sorted_conns.keys()), 1000, 1))
-    print(solve(list(sorted_conns.keys()), len(coords), 2))
+    UNION_FIND = {i: i for i in range(len(parents))}
+    rels = []
+    for i, a in enumerate(parents):
+        for j, b in enumerate(parents):
+            if i > j:
+                dist = get_distance(a, b)
+                rels.append((dist, i, j))
+
+    rels = sorted(rels)
+    solve(parents, rels)
