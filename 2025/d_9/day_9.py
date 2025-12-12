@@ -85,3 +85,4 @@ if __name__ == "__main__":
         if solve2(pairs, segments):
             print(area)
             break
+        
