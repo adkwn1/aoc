@@ -40,26 +40,8 @@ def press_btn(state:str, buttons:list[int|tuple]) -> int:
     return min_count
 
 
-def evaluate_comb(state:str, combs:tuple):
-    for btn in combs:
-        state = toggle_disp(state, btn)
-    
-    if "#" not in state:
-        return True
-    
-    return False
-
-
-def update_joltage(curr_state:str, seq:str) -> tuple[str|None, bool]:
-    new_state = [int(num) for num in curr_state.split(",")]
-    press = [int(num) for num in seq.split(",")]
-    
-    for idx in range(len(new_state)):
-        new_state[idx] -= press[idx]
-        if new_state[idx] < 0:
-            return None, True
-    
-    return ",".join(str(num) for num in new_state), False
+# Part 2 uses solution from redditor tenthmascot
+## https://www.reddit.com/r/adventofcode/comments/1pk87hl/2025_day_10_part_2_bifurcate_your_way_to_victory/
 
 
 def get_sequence(buttons:list[int|tuple]):
