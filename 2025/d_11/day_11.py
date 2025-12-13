@@ -77,6 +77,3 @@ if __name__ == "__main__":
 
     print(len(list(nx.all_simple_paths(G, "you", "out"))))
     print(find_all_with_passthrough(edge_list))
-
-
-# 101561660372105615972100 too high
